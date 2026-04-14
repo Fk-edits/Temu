@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>ተሙ እጣ | Lucky Spin Wheel - Birr Prize Draw</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>ተሙ እጣ | Lucky Spin – Telegram Mini App</title>
   <!-- Font Awesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <!-- canvas-confetti -->
@@ -13,27 +13,28 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Inter', system-ui, 'Segoe UI', sans-serif;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
     }
 
     body {
       background: radial-gradient(circle at 20% 30%, #0a2f2f, #031012);
       min-height: 100vh;
-      padding: 20px;
+      padding: 12px;
       display: flex;
       justify-content: center;
       align-items: center;
     }
 
-    /* main container */
+    /* main container - telegram friendly */
     .app-container {
-      max-width: 1400px;
+      max-width: 550px;
       width: 100%;
-      background: rgba(15, 30, 35, 0.7);
+      margin: 0 auto;
+      background: rgba(15, 30, 35, 0.75);
       backdrop-filter: blur(12px);
-      border-radius: 3rem;
-      padding: 1.5rem;
-      box-shadow: 0 30px 45px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,200,0.1);
+      border-radius: 2rem;
+      padding: 1rem;
+      box-shadow: 0 20px 35px rgba(0,0,0,0.4);
       border: 1px solid rgba(255,200,120,0.3);
     }
 
@@ -43,93 +44,86 @@
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      margin-bottom: 1.5rem;
-      gap: 12px;
-      padding: 0 0.5rem;
+      gap: 10px;
+      margin-bottom: 1rem;
+      padding: 0 0.2rem;
     }
     .title-amharic {
-      font-size: 2rem;
+      font-size: 1.5rem;
       font-weight: 800;
       background: linear-gradient(135deg, #FFE6B0, #FFA559);
       background-clip: text;
       -webkit-background-clip: text;
       color: transparent;
-      letter-spacing: 2px;
-      text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      white-space: nowrap;
     }
     .title-amharic i {
-      font-size: 1.8rem;
-      margin-right: 8px;
+      font-size: 1.3rem;
+      margin-right: 5px;
       color: #ffbc6e;
     }
     .action-buttons {
       display: flex;
-      gap: 12px;
+      gap: 8px;
     }
     .icon-btn {
       background: #2c4a3eaa;
       backdrop-filter: blur(4px);
       border: none;
-      padding: 10px 16px;
+      padding: 6px 12px;
       border-radius: 40px;
       font-weight: 600;
       cursor: pointer;
       color: #ffefcf;
-      gap: 8px;
-      transition: 0.2s;
-      font-size: 0.9rem;
+      font-size: 0.75rem;
+      gap: 5px;
     }
     .icon-btn i {
-      font-size: 1rem;
-    }
-    .icon-btn:hover {
-      background: #ffae5a;
-      color: #1f2a1b;
-      transform: scale(0.97);
+      font-size: 0.8rem;
     }
 
-    /* dashboard layout */
+    /* stacked layout for mobile */
     .dashboard {
       display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      justify-content: center;
-      align-items: flex-start;
+      flex-direction: column;
+      gap: 1.5rem;
     }
 
-    /* wheel side */
+    /* wheel area - centered */
     .wheel-area {
-      flex: 2;
-      min-width: 300px;
       display: flex;
       flex-direction: column;
       align-items: center;
+      width: 100%;
     }
     .canvas-holder {
       position: relative;
       display: inline-block;
+      max-width: 100%;
+      margin: 0 auto;
     }
     canvas {
       width: 100%;
-      max-width: 530px;
       height: auto;
+      max-width: 320px;
+      aspect-ratio: 1 / 1;
       background: #fef3e2;
       border-radius: 50%;
-      box-shadow: 0 20px 35px rgba(0,0,0,0.4), 0 0 0 6px #ffcf8a, 0 0 0 12px #b97f2e;
-      transition: filter 0.2s;
+      box-shadow: 0 12px 25px rgba(0,0,0,0.4), 0 0 0 4px #ffcf8a, 0 0 0 8px #b97f2e;
+      display: block;
+      margin: 0 auto;
     }
     .pointer-icon {
       position: absolute;
-      top: -28px;
+      top: -22px;
       left: 50%;
       transform: translateX(-50%);
       width: 0;
       height: 0;
-      border-left: 24px solid transparent;
-      border-right: 24px solid transparent;
-      border-top: 52px solid #e34d4d;
-      filter: drop-shadow(0 8px 12px rgba(0,0,0,0.3));
-      z-index: 12;
+      border-left: 18px solid transparent;
+      border-right: 18px solid transparent;
+      border-top: 40px solid #e34d4d;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
     }
     .pointer-icon::before {
       content: "\f0a3";
@@ -137,150 +131,136 @@
       font-weight: 900;
       position: absolute;
       color: white;
-      font-size: 20px;
-      top: -48px;
-      left: -12px;
-    }
-    @keyframes wheelRipple {
-      0% { box-shadow: 0 0 0 0 rgba(255,200,100,0.7), 0 0 0 0 rgba(255,180,60,0.5); }
-      100% { box-shadow: 0 0 0 25px rgba(255,200,100,0), 0 0 0 40px rgba(255,180,60,0); }
-    }
-    .ripple-effect {
-      animation: wheelRipple 0.8s ease-out;
+      font-size: 16px;
+      top: -38px;
+      left: -10px;
     }
 
-    /* right panel */
+    /* right panel - all controls */
     .controls-panel {
-      flex: 1.3;
-      min-width: 290px;
       background: rgba(8, 22, 26, 0.85);
       backdrop-filter: blur(8px);
-      border-radius: 2rem;
-      padding: 1.5rem 1.2rem;
-      box-shadow: 0 12px 28px rgba(0,0,0,0.3);
+      border-radius: 1.5rem;
+      padding: 1.2rem;
       border: 1px solid rgba(255,190,80,0.3);
     }
 
     .add-participant {
       display: flex;
-      gap: 10px;
-      margin-bottom: 1.2rem;
+      gap: 8px;
+      margin-bottom: 1rem;
     }
     .add-participant input {
       flex: 1;
-      padding: 12px 16px;
+      padding: 10px 14px;
       border-radius: 60px;
       border: none;
       background: #fef5e8;
       font-weight: 500;
+      font-size: 0.9rem;
       outline: none;
-    }
-    .add-participant input:focus {
-      box-shadow: 0 0 0 3px #ffa54d80;
     }
     button {
       background: #ffae5a;
       border: none;
-      padding: 0 20px;
+      padding: 0 16px;
       border-radius: 60px;
       font-weight: 600;
       cursor: pointer;
       transition: 0.2s;
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+      gap: 6px;
+      font-size: 0.85rem;
+      white-space: nowrap;
     }
     button:active { transform: scale(0.96); }
-    button:disabled { opacity: 0.5; transform: none; cursor: not-allowed; }
+    button:disabled { opacity: 0.5; }
 
     .participants-section {
-      margin: 18px 0;
+      margin: 12px 0;
     }
     .section-title {
       display: flex;
       justify-content: space-between;
       color: #ffddb0;
-      font-size: 0.85rem;
-      margin-bottom: 8px;
+      font-size: 0.75rem;
+      margin-bottom: 6px;
     }
     .participants-scroll {
-      max-height: 210px;
+      max-height: 180px;
       overflow-y: auto;
       border-radius: 1rem;
       background: #07121760;
-      padding: 6px 8px;
+      padding: 4px 6px;
     }
     .participant-item {
       background: #1e3a42;
-      margin: 6px 0;
-      padding: 8px 12px;
-      border-radius: 60px;
+      margin: 5px 0;
+      padding: 6px 10px;
+      border-radius: 40px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       color: #f7e6cf;
-      font-weight: 500;
-      border-left: 4px solid #ffa559;
+      font-size: 0.85rem;
+      border-left: 3px solid #ffa559;
     }
     .participant-item.winner-highlight {
       background: linear-gradient(95deg, #ffb347, #ffdd99);
       color: #1f2e1c;
       font-weight: bold;
-      border-left: 4px solid gold;
-      box-shadow: 0 0 8px gold;
     }
     .delete-participant {
       background: #3b2c2480;
-      color: #ffcfaa;
-      border-radius: 40px;
-      padding: 4px 12px;
+      padding: 3px 10px;
       font-size: 0.7rem;
     }
 
     .fee-panel {
       background: #0a1c1f70;
-      border-radius: 1.5rem;
-      padding: 12px;
-      margin: 15px 0;
+      border-radius: 1.2rem;
+      padding: 10px;
+      margin: 12px 0;
     }
     .fee-row {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      margin-bottom: 12px;
+      align-items: center;
       flex-wrap: wrap;
       gap: 8px;
+      margin-bottom: 8px;
     }
     .birr-select {
       background: #fef0df;
-      padding: 8px 12px;
+      padding: 6px 10px;
       border-radius: 40px;
       border: none;
       font-weight: bold;
-      cursor: pointer;
+      font-size: 0.8rem;
     }
     .total-pot {
       background: #2c5240a0;
-      padding: 8px;
+      padding: 6px;
       border-radius: 2rem;
       text-align: center;
+      font-size: 0.85rem;
       font-weight: bold;
       color: #ffeaac;
     }
     .winner-prize-input {
       display: flex;
       align-items: center;
-      gap: 12px;
-      margin-top: 12px;
+      gap: 10px;
+      margin-top: 10px;
       flex-wrap: wrap;
     }
     .winner-prize-input input {
       background: #fef0df;
       border: none;
-      padding: 8px 12px;
+      padding: 6px 10px;
       border-radius: 40px;
-      width: 130px;
+      width: 110px;
       font-weight: bold;
       text-align: center;
     }
@@ -288,47 +268,47 @@
       background: linear-gradient(115deg, #f7931e, #ffd966);
       width: 100%;
       justify-content: center;
-      padding: 14px 0;
-      font-size: 1.2rem;
+      padding: 12px 0;
+      font-size: 1rem;
       font-weight: bold;
-      margin: 12px 0 8px;
+      margin: 10px 0 6px;
     }
     .reset-btn {
       background: #3d5a6c;
       color: white;
       width: 100%;
       justify-content: center;
-      margin-top: 6px;
+      margin-top: 4px;
     }
     .winner-card {
       background: #00000055;
-      border-radius: 1.5rem;
-      padding: 10px;
-      margin-top: 15px;
+      border-radius: 1.2rem;
+      padding: 8px;
+      margin-top: 12px;
       text-align: center;
     }
     .history-list {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 6px;
       justify-content: center;
-      margin-top: 8px;
+      margin-top: 6px;
     }
     .history-badge {
       background: #2a414d;
-      padding: 4px 12px;
+      padding: 3px 10px;
       border-radius: 40px;
       font-size: 0.7rem;
     }
 
-    /* MODALS (winner, info, developer) */
+    /* modals */
     .modal-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0,0,0,0.8);
+      background: rgba(0,0,0,0.85);
       backdrop-filter: blur(6px);
       display: flex;
       align-items: center;
@@ -344,109 +324,104 @@
     }
     .modal-content {
       background: linear-gradient(145deg, #2d3e2c, #1b2a22);
-      padding: 2rem;
-      border-radius: 2.5rem;
+      padding: 1.5rem;
+      border-radius: 2rem;
       text-align: center;
-      max-width: 380px;
-      width: 85%;
-      box-shadow: 0 25px 40px rgba(0,0,0,0.5), 0 0 0 4px #ffcf8a;
-      transform: scale(0.9);
-      transition: transform 0.2s cubic-bezier(0.34, 1.2, 0.64, 1);
-    }
-    .active .modal-content {
-      transform: scale(1);
+      max-width: 85%;
+      width: 300px;
+      box-shadow: 0 20px 30px rgba(0,0,0,0.5), 0 0 0 3px #ffcf8a;
     }
     .modal-content i {
-      font-size: 3rem;
+      font-size: 2.5rem;
       color: gold;
-      margin-bottom: 1rem;
     }
     .modal-content h3 {
-      font-size: 1.6rem;
+      font-size: 1.3rem;
+      margin: 8px 0;
       color: #ffeaac;
     }
-    .modal-content p {
-      margin: 15px 0;
+    .modal-content p, .guide-list {
+      font-size: 0.8rem;
       color: #ffefcf;
-    }
-    .close-modal-btn {
-      background: #ffae5a;
-      padding: 8px 20px;
-      margin-top: 12px;
     }
     .guide-list {
       text-align: left;
-      font-size: 0.85rem;
-      margin: 12px 0;
-      color: #ffe2b5;
+      margin: 10px 0;
+      padding-left: 18px;
     }
     .guide-list li {
-      margin: 8px 0;
-      list-style: none;
+      margin: 5px 0;
     }
-    hr {
-      border-color: #ffb34750;
-      margin: 10px 0;
+    .close-modal-btn {
+      background: #ffae5a;
+      padding: 6px 18px;
+      margin-top: 10px;
     }
-    @media (max-width: 760px) {
-      .app-container { padding: 1rem; }
-      .title-amharic { font-size: 1.5rem; }
+    @keyframes wheelRipple {
+      0% { box-shadow: 0 0 0 0 rgba(255,200,100,0.7); }
+      100% { box-shadow: 0 0 0 20px rgba(255,200,100,0); }
+    }
+    .ripple-effect {
+      animation: wheelRipple 0.8s ease-out;
+    }
+    @media (max-width: 480px) {
+      .app-container { padding: 0.8rem; }
+      .title-amharic { font-size: 1.2rem; white-space: normal; }
+      .icon-btn { padding: 4px 8px; font-size: 0.7rem; }
+      canvas { max-width: 280px; }
+      .delete-participant { padding: 2px 8px; }
     }
   </style>
 </head>
 <body>
 
 <div class="app-container">
-  <!-- Header with Amharic + info/dev buttons -->
   <div class="header-row">
     <div class="title-amharic">
-      <i class="fas fa-dharmachakra"></i> ተሙ እጣ <span style="font-size: 1.2rem;">✨ Lucky Spin</span>
+      <i class="fas fa-dharmachakra"></i> ተሙ እጣ <span style="font-size:0.9rem;">✨Spin</span>
     </div>
     <div class="action-buttons">
       <button id="infoBtn" class="icon-btn"><i class="fas fa-info-circle"></i> Guide</button>
-      <button id="devBtn" class="icon-btn"><i class="fas fa-code"></i> Developer</button>
+      <button id="devBtn" class="icon-btn"><i class="fas fa-code"></i> Dev</button>
     </div>
   </div>
 
   <div class="dashboard">
-    <!-- LEFT: WHEEL -->
+    <!-- WHEEL -->
     <div class="wheel-area">
       <div class="canvas-holder" id="wheelHolder">
-        <canvas id="wheelCanvas" width="530" height="530"></canvas>
+        <canvas id="wheelCanvas" width="400" height="400"></canvas>
         <div class="pointer-icon"></div>
       </div>
-      <div style="margin-top: 18px; font-size: 0.75rem; color: #ecd6aa;">
-        <i class="fas fa-users"></i> Each participant pays entry fee &nbsp;|&nbsp; <i class="fas fa-gift"></i> Spin for winner!
+      <div style="margin-top: 10px; font-size: 0.7rem; color: #ecd6aa; text-align: center;">
+        <i class="fas fa-users"></i> Each pays entry fee &nbsp;|&nbsp; <i class="fas fa-gift"></i> Spin for winner!
       </div>
     </div>
 
-    <!-- RIGHT PANEL -->
+    <!-- CONTROLS -->
     <div class="controls-panel">
-      <!-- Add participant -->
       <div class="add-participant">
-        <input type="text" id="participantName" placeholder="Participant name (e.g., Meron, Abebe)" autocomplete="off">
+        <input type="text" id="participantName" placeholder="Participant name (e.g., Meron)" autocomplete="off">
         <button id="addParticipantBtn"><i class="fas fa-user-plus"></i> Add</button>
       </div>
 
-      <!-- Participants list -->
       <div class="participants-section">
         <div class="section-title">
           <span><i class="fas fa-list"></i> Participants (<span id="participantCount">0</span>)</span>
-          <span><i class="fas fa-trash-alt"></i> click ✖ to remove</span>
+          <span><i class="fas fa-trash-alt"></i> tap ✖ to remove</span>
         </div>
         <div class="participants-scroll" id="participantsList">
-          <div style="text-align:center; padding:20px; color:#bda47b;"><i class="fas fa-user-plus"></i> Add participants above</div>
+          <div style="text-align:center; padding:12px; color:#bda47b;"><i class="fas fa-user-plus"></i> Add participants</div>
         </div>
       </div>
 
-      <!-- Fee & Pot & Prize -->
       <div class="fee-panel">
         <div class="fee-row">
-          <label><i class="fas fa-money-bill-wave"></i> Entry fee (birr per person)</label>
+          <label><i class="fas fa-money-bill-wave"></i> Entry fee (Birr)</label>
           <select id="feeSelect" class="birr-select">
-            <option value="10">10 Birr</option><option value="20">20 Birr</option><option value="30">30 Birr</option>
-            <option value="40">40 Birr</option><option value="50" selected>50 Birr</option><option value="100">100 Birr</option>
-            <option value="150">150 Birr</option><option value="200">200 Birr</option><option value="300">300 Birr</option>
+            <option value="10">10</option><option value="20">20</option><option value="30">30</option>
+            <option value="40">40</option><option value="50" selected>50</option><option value="100">100</option>
+            <option value="150">150</option><option value="200">200</option><option value="300">300</option>
           </select>
         </div>
         <div class="total-pot" id="totalPotDisplay">
@@ -455,7 +430,7 @@
         <div class="winner-prize-input">
           <label><i class="fas fa-trophy"></i> Winner gets:</label>
           <input type="number" id="winnerPrizeInput" value="0" step="10" min="0">
-          <button id="setPotAsPrizeBtn" class="set-pot-btn"><i class="fas fa-sync-alt"></i> = Total Pot</button>
+          <button id="setPotAsPrizeBtn" style="padding: 5px 12px;"><i class="fas fa-sync-alt"></i> = Pot</button>
         </div>
       </div>
 
@@ -470,44 +445,39 @@
   </div>
 </div>
 
-<!-- MODAL: WINNER POPUP -->
+<!-- WINNER MODAL -->
 <div id="winnerModal" class="modal-overlay">
   <div class="modal-content">
     <i class="fas fa-crown"></i>
     <h3>🏆 አሸናፊ! 🏆</h3>
-    <div id="modalWinnerMessage" class="winner-message" style="background:#fdf4db; padding:8px 16px; border-radius:60px; margin:12px 0;">—</div>
-    <button class="close-modal-btn" id="closeWinnerModal"><i class="fas fa-check-circle"></i> እሺ አመሰግናለሁ</button>
+    <div id="modalWinnerMessage" style="background:#fdf4db; padding:6px 12px; border-radius:60px; margin:10px 0; font-weight:bold;">—</div>
+    <button class="close-modal-btn" id="closeWinnerModal">Close</button>
   </div>
 </div>
 
-<!-- MODAL: DEVELOPER INFO -->
+<!-- DEVELOPER MODAL -->
 <div id="devModal" class="modal-overlay">
   <div class="modal-content">
     <i class="fas fa-laptop-code"></i>
     <h3>👨‍💻 Developer</h3>
-    <p>This bot / web app is created by <strong>Fikir</strong>.</p>
+    <p>Created by <strong>Fikir</strong>.</p>
     <p><i class="fab fa-telegram"></i> Contact: <strong>@PET_Fikir</strong> on Telegram</p>
-    <p><i class="fas fa-envelope"></i> For custom spins, collaborations, or feedback.</p>
     <button class="close-modal-btn closeAnyModal">Close</button>
   </div>
 </div>
 
-<!-- MODAL: INFO / GUIDE -->
+<!-- INFO MODAL -->
 <div id="infoModal" class="modal-overlay">
   <div class="modal-content">
     <i class="fas fa-book-open"></i>
-    <h3>📖 How to use</h3>
+    <h3>How to use</h3>
     <ul class="guide-list">
-      <li><i class="fas fa-user-plus"></i> <strong>Add participants</strong> – enter name and click Add.</li>
-      <li><i class="fas fa-coins"></i> <strong>Set entry fee</strong> – each person pays selected Birr.</li>
-      <li><i class="fas fa-chart-line"></i> <strong>Total pot</strong> updates automatically.</li>
-      <li><i class="fas fa-gift"></i> <strong>Winner prize</strong> – set how much the winner gets (can be total pot or custom).</li>
-      <li><i class="fas fa-play"></i> <strong>Click SPIN</strong> – wheel rotates, winner appears with popup + confetti.</li>
-      <li><i class="fas fa-trash-alt"></i> Remove participants anytime or clear all.</li>
-      <li><i class="fas fa-history"></i> Recent winners stored in history.</li>
+      <li>➕ Add participants (names)</li>
+      <li>💰 Set entry fee per person</li>
+      <li>🏆 Choose winner prize (can be total pot)</li>
+      <li>🎡 Click SPIN – lucky winner appears!</li>
+      <li>✖ Remove any participant anytime</li>
     </ul>
-    <hr>
-    <p><i class="fas fa-heart"></i> መልካም እድል! (Good luck!)</p>
     <button class="close-modal-btn closeAnyModal">Got it</button>
   </div>
 </div>
@@ -544,19 +514,18 @@
     const closeWinnerModal = document.getElementById('closeWinnerModal');
     const modalWinnerMessage = document.getElementById('modalWinnerMessage');
 
-    // wheel dimensions
-    let width = 530, height = 530;
-    let centerX = 265, centerY = 265;
-    let radius = 225;
-
-    function setCanvasSize() {
-      canvas.width = 530;
-      canvas.height = 530;
-      width = 530; height = 530;
-      centerX = 265; centerY = 265;
-      radius = 225;
+    // wheel dimensions (responsive canvas)
+    function resizeCanvas() {
+      const container = document.querySelector('.canvas-holder');
+      const maxSize = Math.min(container.clientWidth, 340);
+      canvas.width = maxSize;
+      canvas.height = maxSize;
+      centerX = maxSize/2;
+      centerY = maxSize/2;
+      radius = centerX - 15;
       drawWheel();
     }
+    let centerX = 200, centerY = 200, radius = 185;
 
     function getSegmentColor(idx, total) {
       let hue = (idx * 360 / total + 20) % 360;
@@ -565,13 +534,13 @@
 
     function drawWheel() {
       if (!ctx) return;
-      ctx.clearRect(0, 0, width, height);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
       if (participants.length === 0) {
-        ctx.font = "500 22px 'Inter'";
+        ctx.font = "500 18px 'Inter'";
         ctx.fillStyle = "#cca86e";
-        ctx.fillText("➕ Add participants", centerX-90, centerY);
-        ctx.font = "14px system-ui";
-        ctx.fillText("to start spinning", centerX-65, centerY+40);
+        ctx.fillText("➕ Add", centerX-35, centerY);
+        ctx.font = "12px system-ui";
+        ctx.fillText("participants", centerX-42, centerY+22);
         drawCenterLogo();
         return;
       }
@@ -587,7 +556,7 @@
         ctx.fillStyle = getSegmentColor(i, total);
         ctx.fill();
         ctx.strokeStyle = "#FFF2DD";
-        ctx.lineWidth = 2;
+        ctx.lineWidth = 1.8;
         ctx.stroke();
         // text
         const mid = start + angleStep/2;
@@ -595,8 +564,9 @@
         const x = centerX + Math.cos(mid) * textRad;
         const y = centerY + Math.sin(mid) * textRad;
         let name = participants[i];
-        let short = name.length > 14 ? name.slice(0,12)+".." : name;
-        ctx.font = `600 ${Math.min(16, Math.max(11, 160/total))}px "Inter"`;
+        let short = name.length > 12 ? name.slice(0,10)+".." : name;
+        let fontSize = Math.min(14, Math.max(9, 140/total));
+        ctx.font = `600 ${fontSize}px "Inter"`;
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
         ctx.fillStyle = "#1f2a1c";
@@ -611,16 +581,15 @@
 
     function drawCenterLogo() {
       ctx.beginPath();
-      ctx.arc(centerX, centerY, 32, 0, Math.PI*2);
+      ctx.arc(centerX, centerY, radius*0.13, 0, Math.PI*2);
       ctx.fillStyle = "#F9E0B0";
-      ctx.shadowBlur = 6;
       ctx.fill();
       ctx.strokeStyle = "#cb8b2c";
-      ctx.lineWidth = 2.5;
+      ctx.lineWidth = 1.5;
       ctx.stroke();
-      ctx.font = "28px 'Font Awesome 6 Free'";
+      ctx.font = `${Math.floor(radius*0.12)}px "Font Awesome 6 Free"`;
       ctx.fillStyle = "#d48d2b";
-      ctx.fillText("\uf001", centerX-5, centerY+7);
+      ctx.fillText("\uf001", centerX-5, centerY+5);
     }
 
     function getWinnerIndex() {
@@ -652,7 +621,7 @@
     function renderParticipantsList() {
       if (!participantsListDiv) return;
       if (participants.length === 0) {
-        participantsListDiv.innerHTML = `<div style="text-align:center; padding:20px; color:#bda47b;"><i class="fas fa-user-slash"></i> No participants, add some</div>`;
+        participantsListDiv.innerHTML = `<div style="text-align:center; padding:12px; color:#bda47b;"><i class="fas fa-user-slash"></i> No participants</div>`;
         participantCountSpan.innerText = "0";
         return;
       }
@@ -686,21 +655,15 @@
       drawWheel();
       updatePotAndPrize();
       renderParticipantsList();
-      if (participants.length === 0) winnerHistory = []; // optional
-      else updateHistoryUI();
+      if (participants.length === 0) winnerHistory = [];
+      updateHistoryUI();
     }
 
     function addParticipant() {
       if (animating) return;
       let name = participantNameInput.value.trim();
-      if (name === "") {
-        alert("Please enter participant name");
-        return;
-      }
-      if (participants.length >= 28) {
-        alert("Max 28 participants for wheel readability");
-        return;
-      }
+      if (name === "") { alert("Enter participant name"); return; }
+      if (participants.length >= 28) { alert("Max 28 participants"); return; }
       participants.push(name);
       participantNameInput.value = "";
       currentRotation = 0;
@@ -739,7 +702,7 @@
       }
       let html = '';
       winnerHistory.forEach(w => {
-        let short = w.length > 18 ? w.slice(0,15)+'..' : w;
+        let short = w.length > 16 ? w.slice(0,14)+'..' : w;
         html += `<span class="history-badge"><i class="fas fa-star"></i> ${escapeHtml(short)}</span>`;
       });
       historyListDiv.innerHTML = html;
@@ -751,38 +714,30 @@
       const wheelHolder = document.getElementById('wheelHolder');
       wheelHolder.classList.add('ripple-effect');
       setTimeout(() => wheelHolder.classList.remove('ripple-effect'), 800);
-      canvasConfetti({ particleCount: 180, spread: 85, origin: { y: 0.6 }, startVelocity: 18, colors: ['#ffb347','#ffdd77','#f27d0c'] });
-      canvasConfetti({ particleCount: 60, spread: 120, origin: { y: 0.4, x: 0.3 } });
+      canvasConfetti({ particleCount: 130, spread: 70, origin: { y: 0.6 }, startVelocity: 16, colors: ['#ffb347','#ffdd77','#f27d0c'] });
+      canvasConfetti({ particleCount: 40, spread: 100, origin: { y: 0.4, x: 0.3 } });
     }
 
     function startSpin() {
       if (animating) return;
-      if (participants.length < 2) {
-        alert("Add at least 2 participants to spin!");
-        return;
-      }
+      if (participants.length < 2) { alert("Add at least 2 participants"); return; }
       const prizeAmount = parseInt(winnerPrizeInput.value, 10);
-      if (isNaN(prizeAmount) || prizeAmount <= 0) {
-        alert("Please set a valid winner prize (greater than 0 Birr)");
-        return;
-      }
+      if (isNaN(prizeAmount) || prizeAmount <= 0) { alert("Set a valid winner prize > 0"); return; }
       const totalPot = participants.length * parseInt(feeSelect.value,10);
-      if (prizeAmount > totalPot) {
-        if (!confirm(`Winner prize (${prizeAmount} Birr) exceeds total pot (${totalPot} Birr). Continue anyway?`)) return;
-      }
+      if (prizeAmount > totalPot && !confirm(`Prize (${prizeAmount}) exceeds pot (${totalPot}). Continue?`)) return;
 
       animating = true;
       spinBtn.disabled = true;
       addBtn.disabled = true;
       resetParticipantsBtn.disabled = true;
 
-      const minTurns = 6, maxTurns = 14;
+      const minTurns = 5, maxTurns = 12;
       const turns = minTurns + Math.random() * (maxTurns - minTurns);
       const extraRad = Math.random() * Math.PI * 2;
       const deltaRad = (turns * 2 * Math.PI) + extraRad;
       const startRot = currentRotation;
       const targetRot = startRot + deltaRad;
-      const duration = 1800;
+      const duration = 1700;
       const startTime = performance.now();
 
       function easeOutCubic(t) { return 1 - Math.pow(1-t, 3); }
@@ -805,9 +760,7 @@
             renderParticipantsList();
             addToHistory(winnerName);
             showWinnerPopup(winnerName, prize);
-          } else {
-            renderParticipantsList();
-          }
+          } else { renderParticipantsList(); }
           animating = false;
           spinBtn.disabled = false;
           addBtn.disabled = false;
@@ -837,24 +790,21 @@
     setPotAsPrizeBtn.addEventListener('click', setPrizeToTotalPot);
     participantNameInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') addParticipant(); });
 
-    // modals close logic
-    function closeAllModals() {
-      winnerModal.classList.remove('active');
-      devModal.classList.remove('active');
-      infoModal.classList.remove('active');
-    }
+    // modals
     document.getElementById('devBtn').addEventListener('click', () => devModal.classList.add('active'));
     document.getElementById('infoBtn').addEventListener('click', () => infoModal.classList.add('active'));
     closeWinnerModal.addEventListener('click', () => winnerModal.classList.remove('active'));
-    document.querySelectorAll('.closeAnyModal').forEach(btn => btn.addEventListener('click', closeAllModals));
+    document.querySelectorAll('.closeAnyModal').forEach(btn => btn.addEventListener('click', () => {
+      devModal.classList.remove('active');
+      infoModal.classList.remove('active');
+    }));
     window.addEventListener('click', (e) => {
       if (e.target === winnerModal) winnerModal.classList.remove('active');
       if (e.target === devModal) devModal.classList.remove('active');
       if (e.target === infoModal) infoModal.classList.remove('active');
     });
-
-    // initial render
-    setCanvasSize();
+    window.addEventListener('resize', () => { resizeCanvas(); drawWheel(); });
+    resizeCanvas();
     renderParticipantsList();
     updatePotAndPrize();
     setPrizeToTotalPot();
@@ -862,4 +812,4 @@
   })();
 </script>
 </body>
-</html>
+  </html>
